@@ -16,7 +16,7 @@ var morgan = require('morgan');
 var stream = {
     write: (message) => {
         var messageJson = JSON.parse(message);
-        logger.http(`${messageJson.method} ${messageJson.url}`, {
+        logger.info(`${messageJson.method} ${messageJson.url}`, {
             metadata: messageJson
         })
     }
