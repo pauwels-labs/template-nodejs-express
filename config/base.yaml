@@ -1,0 +1,4 @@
+port: 8080
+helloMessage: "Hi there, this is the base config!"
+test:
+  fooBar: "blah"
