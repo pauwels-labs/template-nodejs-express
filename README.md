@@ -2,5 +2,5 @@
 
 # Init
 
-Run `./template.sh` to rename `package.json` and `README.md` and you
-should be good to go!
+Run `./template.sh` from the root directory of the repo to rename the
+project in the appropriate files and you should be good to go!

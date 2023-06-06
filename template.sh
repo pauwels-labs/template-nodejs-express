@@ -13,3 +13,4 @@ git push
 git tag v0.0.1
 git push --tags
 echo "Rename complete, this script will now delete itself"
+rm -rf template.sh
