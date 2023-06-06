@@ -58,4 +58,6 @@ app.use(function(err, req, res, next) {
     res.render('error', { title: 'Express' });
 });
 
+logger.debug("Express app successfully created")
+
 module.exports = app;
