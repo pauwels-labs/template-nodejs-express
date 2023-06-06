@@ -32,12 +32,12 @@ spec:
           valueFrom:
             fieldRef:
               apiVersion: v1
-              fieldPath: metadata.labels.app
+              fieldPath: metadata.labels["app"]
         - name: APPCFG_env
           valueFrom:
             fieldRef:
               apiVersion: v1
-              fieldPath: metadata.labels.env
+              fieldPath: metadata.labels["env"]
         envFrom:
         - secretRef:
             name: "env-${name}"
