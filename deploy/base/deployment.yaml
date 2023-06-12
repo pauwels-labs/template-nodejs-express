@@ -19,7 +19,7 @@ spec:
           runAsNonRoot: true
           runAsUser: 1000
         image: "appimage"
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: 256m
