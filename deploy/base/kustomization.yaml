@@ -12,3 +12,5 @@ resources:
 - serviceaccount.yaml
 - service.yaml
 - virtualservice.yaml
+- authorizationpolicy.yaml
+- requestauthentication.yaml

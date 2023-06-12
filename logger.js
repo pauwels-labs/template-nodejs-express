@@ -14,7 +14,20 @@ var logFormat = winston.format.combine(
     winston.format.timestamp(),
     winston.format.colorize(),
     winston.format.printf((info) => {
-        return `${info.timestamp} ${info.level}: ${info.message}`;
+        const metaKeys = info.metadata ? Object.keys(info.metadata) : [];
+        if (metaKeys.length > 0) {
+            var metaString = "(";
+            for (i = 0; i < metaKeys.length; ++i) {
+                if (i == metaKeys.length - 1) {
+                    metaString += `${metaKeys[i]}=${info.metadata[metaKeys[i]]})`;
+                } else {
+                    metaString += `${metaKeys[i]}=${info.metadata[metaKeys[i]]}, `;
+                }
+            }
+            return `${info.timestamp} ${info.level}: ${info.message} ${metaString} `;
+        } else {
+            return `${info.timestamp} ${info.level}: ${info.message}`;
+        }
     })
 );
 if (env != "local") {
