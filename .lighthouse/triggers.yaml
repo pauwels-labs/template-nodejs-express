@@ -1,0 +1,21 @@
+apiVersion: config.lighthouse.jenkins-x.io/v1alpha1
+kind: TriggerConfig
+spec:
+  postsubmits: []
+  # - agent: tekton-pipeline
+  #   branches:
+  #   - main
+  #   context: release
+  #   name: release
+  #   source: "release.yaml"
+  #   pipeline_run_params:
+  #   - name: revision
+  #     value_template: "{{ .Refs.BaseSHA }}"
+  #   - name: sshURL
+  #     value_template: "git@github.com:{{ .Refs.Org }}/{{ .Refs.Repo }}.git"
+  #   - name: imageURL
+  #     value_template: "274295908850.dkr.ecr.eu-west-1.amazonaws.com/t/pauwels-labs-main/github/{{ .Refs.Org }}/{{ .Refs.Repo }}"
+  #   - name: ghTokenSecretName
+  #     value_template: "token-github-capt-haddock"
+  #   - name: sshSecretName
+  #     value_template: "ssh-pauwels-labs-main-github-{{ .Refs.Org }}-{{ .Refs.Repo }}"
