@@ -12,5 +12,5 @@ echo "Committing and pushing changes"
 git add .
 git commit -am "fix: renames files via template.sh script"
 git push
-git tag v0.0.1
+git tag v0.0.0
 git push --tags
