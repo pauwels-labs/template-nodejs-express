@@ -8,9 +8,10 @@ grep -rl "$OLD_NAME" . --exclude-dir=.git --exclude=template.sh | xargs sed -i "
 npm install
 echo "Rename complete, this script will now delete itself"
 rm -rf template.sh
-echo "Committing and pushing changes"
+echo "Pushing initial v0.0.0 tag pre-rename commit"
+git tag v0.0.0
+git push --tags
+echo "Committing and pushing rename commit"
 git add .
 git commit -am "fix: renames files via template.sh script"
 git push
-git tag v0.0.0
-git push --tags
