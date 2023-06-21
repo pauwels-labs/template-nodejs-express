@@ -7,10 +7,3 @@ describe("GET /", () => {
     expect(res.statusCode).toBe(200);
   })
 })
-
-describe("GET /", () => {
-  test("should respond with a 200 status code and an HTML view with the title set to /index", async () => {
-    const res = await request(app).get("/");
-    expect(res.statusCode).toBe(200);
-  })
-})
