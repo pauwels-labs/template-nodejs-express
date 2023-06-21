@@ -5,3 +5,5 @@ README.md
 .git
 .gitignore
 LICENSE
+coverage/
+gitops-coverage.md
