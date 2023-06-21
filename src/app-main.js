@@ -26,7 +26,6 @@ var jsonFormat = jsonLogFormatter(':method :url :status :res[content-length] byt
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var somethingElse = require('./routes/something-else');
 
 var app = express();
 
