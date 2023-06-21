@@ -6,13 +6,13 @@ const serviceNameSanitized = serviceName.replaceAll('-', '_').toLowerCase();
 // Load prometheus client and define custom metrics
 const client = require('prom-client');
 const hitCounter = new client.Counter({
-    name: serviceNameSanitized + "_endpoint_hit_total",
-    help: "Accumulates the number of times the /hit endpoint has been hit"
+  name: serviceNameSanitized + "_endpoint_hit_total",
+  help: "Accumulates the number of times the /hit endpoint has been hit"
 });
 
 module.exports = {
-    client,
-    customMetrics: {
-        hitCounter
-    }
+  client,
+  customMetrics: {
+    hitCounter
+  }
 }

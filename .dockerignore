@@ -2,3 +2,6 @@ deploy/
 Dockerfile
 node_modules/
 README.md
+.git
+.gitignore
+LICENSE

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 // Load logger
-var logger = require('../logger')
+var logger = require('../src/logger')
 
 /**
  * Module dependencies.
  */
 
-var app = require('../app');
+var mainApp = require('../src/app-main');
 var http = require('http');
 
 /**
@@ -15,13 +15,13 @@ var http = require('http');
  */
 
 var port = normalizePort(process.env.PORT || '8080');
-app.set('port', port);
+mainApp.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server = http.createServer(mainApp);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -34,7 +34,7 @@ server.on('listening', onListening);
 /**
  * Setup metrics server
  */
-var metricsApp = require('../metrics-app');
+var metricsApp = require('../src/app-metrics');
 var metricsPort = normalizePort(process.env.METRICSPORT || '9080');
 metricsApp.set('port', metricsPort);
 var metricsServer = http.createServer(metricsApp);
@@ -72,21 +72,21 @@ function onError(error) {
   }
 
   var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+      ? 'Pipe ' + port
+      : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
+  case 'EACCES':
+    console.error(bind + ' requires elevated privileges');
+    process.exit(1);
+    break;
+  case 'EADDRINUSE':
+    console.error(bind + ' is already in use');
+    process.exit(1);
+    break;
+  default:
+    throw error;
   }
 }
 
@@ -96,21 +96,21 @@ function onErrorMetrics(error) {
   }
 
   var bind = typeof metricsPort === 'string'
-    ? 'Pipe ' + metricsPort
-    : 'Port ' + metricsPort;
+      ? 'Pipe ' + metricsPort
+      : 'Port ' + metricsPort;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
+  case 'EACCES':
+    console.error(bind + ' requires elevated privileges');
+    process.exit(1);
+    break;
+  case 'EADDRINUSE':
+    console.error(bind + ' is already in use');
+    process.exit(1);
+    break;
+  default:
+    throw error;
   }
 }
 
@@ -121,15 +121,15 @@ function onErrorMetrics(error) {
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
   logger.info('Service listening on ' + bind);
 }
 
 function onListeningMetrics() {
   var addr = metricsServer.address();
   var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+      ? 'pipe ' + addr
+      : 'port ' + addr.port;
   logger.info('Metrics server listening on ' + bind);
 }

@@ -14,18 +14,19 @@ var cookieParser = require('cookie-parser');
 // Setup request logging with Morgan + app logger
 var morgan = require('morgan');
 var stream = {
-    write: (message) => {
-        var messageJson = JSON.parse(message);
-        logger.info(`${messageJson.method} ${messageJson.url}`, {
-            metadata: messageJson
-        })
-    }
+  write: (message) => {
+    var messageJson = JSON.parse(message);
+    logger.info(`${messageJson.method} ${messageJson.url}`, {
+      metadata: messageJson
+    })
+  }
 };
 var jsonLogFormatter = require('morgan-json');
 var jsonFormat = jsonLogFormatter(':method :url :status :res[content-length] bytes :response-time ms');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var somethingElse = require('./routes/something-else');
 
 var app = express();
 
@@ -55,7 +56,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-    res.render('error', { title: 'Express' });
+  res.render('error', { title: 'Express' });
 });
 
 logger.debug("Express app successfully created")
