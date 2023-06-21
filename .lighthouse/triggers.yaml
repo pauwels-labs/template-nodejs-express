@@ -19,3 +19,4 @@ spec:
   #     value_template: "token-github-capt-haddock"
   #   - name: sshSecretName
   #     value_template: "ssh-pauwels-labs-main-github-{{ .Refs.Org }}-{{ .Refs.Repo }}"
+  presubmits: []
