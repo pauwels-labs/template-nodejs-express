@@ -53,6 +53,10 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.labels['app.kubernetes.io/version']
+        - name: APPCFG_otlp_url
+          value: "http://grafana-agent-flow.i-grafana-agent-flow.svc.cluster.local:9095"
+        - name: APPCFG_otlp_protocol
+          value: "grpc"
         envFrom:
         - secretRef:
             name: "env-${name}"
