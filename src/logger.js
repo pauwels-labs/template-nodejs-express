@@ -1,8 +1,7 @@
-// Load config module to extract env, service name, and log level
-var config = require('./config');
-const env = config.get("env");
-const serviceName = config.get("name");
-var logLevel = config.get("log:level");
+// Load config module to extract env, service name, version, and log level
+const config = require('./config');
+const serviceEnv = config.get("meta.env")
+var logLevel = config.get("log.level");
 if (!logLevel) {
   logLevel = "info";
 }
@@ -14,6 +13,10 @@ var logFormat = winston.format.combine(
   winston.format.timestamp(),
   winston.format.colorize(),
   winston.format.printf((info) => {
+    // Create base log line with common info
+    var logLine = `${info.timestamp} ${info.level}: ${info.message}`;
+
+    // Add metadata keys to log-line if available
     const metaKeys = info.metadata ? Object.keys(info.metadata) : [];
     if (metaKeys.length > 0) {
       var metaString = "(";
@@ -24,13 +27,25 @@ var logFormat = winston.format.combine(
           metaString += `${metaKeys[i]}=${info.metadata[metaKeys[i]]}, `;
         }
       }
-      return `${info.timestamp} ${info.level}: ${info.message} ${metaString} `;
-    } else {
-      return `${info.timestamp} ${info.level}: ${info.message}`;
+      logLine += ` ${metaString}`;
     }
+
+    // Add trace information to log-line if available
+    if (info.trace_id) {
+      logLine += ` trace_id=${info.trace_id}`;
+    }
+    if (info.span_id) {
+      logLine += ` span_id=${info.span_id}`;
+    }
+    if (info.trace_flags) {
+      logLine += ` trace_flags=${info.trace_flags}`;
+    }
+
+    // Output log-line
+    return logLine;
   })
 );
-if (env != "local") {
+if (serviceEnv != "local") {
   logFormat = winston.format.combine(
     winston.format.timestamp(),
     winston.format.json()
@@ -41,10 +56,6 @@ if (env != "local") {
 // Create the app logger and write logs to console
 var logger = winston.createLogger({
   level: logLevel,
-  defaultMeta: {
-    env: env,
-    service: serviceName
-  },
   transports: [
     new winston.transports.Console({
       format: logFormat

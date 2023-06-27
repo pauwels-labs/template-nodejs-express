@@ -17,7 +17,7 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
           runAsNonRoot: true
-          runAsUser: 1000
+          runAsUser: 10000
         image: "appimage"
         imagePullPolicy: Always
         resources:
@@ -28,16 +28,31 @@ spec:
             cpu: 256m
             memory: 256Mi
         env:
-        - name: APPCFG_name
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.labels['app']
-        - name: APPCFG_env
+        - name: APPCFG_meta_env
           valueFrom:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.labels['env']
+        - name: APPCFG_meta_namespace
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: APPCFG_meta_pod_name
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: APPCFG_meta_name
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/name']
+        - name: APPCFG_meta_version
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels['app.kubernetes.io/version']
         envFrom:
         - secretRef:
             name: "env-${name}"

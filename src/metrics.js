@@ -1,6 +1,6 @@
 // Load service name to prefix custom metrics
 const config = require('./config')
-const serviceName = config.get("name");
+const serviceName = config.get("meta.name");
 const serviceNameSanitized = serviceName.replaceAll('-', '_').toLowerCase();
 
 // Load prometheus client and define custom metrics

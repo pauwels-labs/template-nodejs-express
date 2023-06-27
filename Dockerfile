@@ -16,4 +16,4 @@ RUN npm ci
 COPY . .
 
 # Start
-ENTRYPOINT ["node", "./bin/www"]
+ENTRYPOINT ["npm", "start", "--silent"]
